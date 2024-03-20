@@ -33,17 +33,18 @@ class ImageClassifierHelper(
     }
 
     private fun setupImageClassifier() {
-        // TODO: Menyiapkan Image Classifier untuk memproses gambar.
 
+        // TODO: Use NPU & GPU
         val imgClassifierOptions = ImageClassifier.ImageClassifierOptions.builder()
             .setScoreThreshold(threshold)
             .setMaxResults(maxResult)
 
         val baseOptions = BaseOptions.builder()
             .setNumThreads(4)
+            .build()
 
 
-        imgClassifierOptions.setBaseOptions(baseOptions.build())
+        imgClassifierOptions.setBaseOptions(baseOptions)
 
         try {
             imageClassifier = ImageClassifier.createFromFileAndOptions(
@@ -59,7 +60,6 @@ class ImageClassifierHelper(
     }
 
     fun classifyStaticImage(imageUri: Uri) {
-        // TODO: mengklasifikasikan imageUri dari gambar statis.
 
         if (imageClassifier == null) setupImageClassifier()
 

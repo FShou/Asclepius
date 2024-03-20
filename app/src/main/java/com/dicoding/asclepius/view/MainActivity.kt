@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onResults(results: List<Classifications>?) {
-                    // TODO: Send Result to ResultActivity
                     results?.let { classificationsList ->
                         if (classificationsList.isNotEmpty() && classificationsList[0].categories.isNotEmpty()) {
                             val category = classificationsList[0].categories[0]
@@ -77,7 +76,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-
             })
         imageClassifier.classifyStaticImage(imgUri)
         binding.progressIndicator.visibility = View.GONE
