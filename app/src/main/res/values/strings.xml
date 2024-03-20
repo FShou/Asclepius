@@ -5,4 +5,14 @@
     <string name="gallery">Galeri</string>
     <string name="analyze">Analyze</string>
     <string name="result">Hasil Analisis</string>
+    <string name="image_to_analyze">Image to Analyze</string>
+    <string name="home">Home</string>
+    <string name="title_activity_history">HistoryActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="history">History</string>
+    <string name="news">News</string>
+    <string name="detect_skin_cancer">Detect Skin Cancer</string>
+    <string name="choose_an_image">Choose an Image</string>
 </resources>

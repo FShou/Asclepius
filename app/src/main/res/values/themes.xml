@@ -3,6 +3,8 @@
     <style name="Base.Theme.Asclepius" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="cornerRadius">8dp</item>
     </style>
 
     <style name="Theme.Asclepius" parent="Base.Theme.Asclepius" />
