@@ -1,3 +1,4 @@
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -37,6 +38,8 @@ android {
         viewBinding = true
         mlModelBinding = true
     }
+
+
 }
 
 dependencies {
@@ -57,6 +60,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
 
+    implementation("com.vanniktech:android-image-cropper:4.5.0")
 
 
     // Library TensorFlow Lite

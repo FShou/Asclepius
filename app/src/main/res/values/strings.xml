@@ -17,4 +17,5 @@
     <string name="choose_an_image">Choose an Image</string>
     <string name="time_stamp">Time Stamp</string>
     <string name="tell_your_doctor">Tell your Doctor</string>
+    <string name="crop_image">Crop Image</string>
 </resources>

@@ -1,17 +1,19 @@
 package com.dicoding.asclepius.view.home
 
 import android.content.Intent
-import android.icu.text.NumberFormat
 import android.net.Uri
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
 import com.dicoding.asclepius.databinding.FragmentHomeBinding
 import com.dicoding.asclepius.helper.ImageClassifierHelper
 import com.dicoding.asclepius.view.ResultActivity
@@ -26,6 +28,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     private var currentImageUri: Uri? = null
+
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri ->
@@ -39,6 +42,18 @@ class HomeFragment : Fragment() {
         viewModel.setCurrentContentUri(uri)
         binding.progressIndicator.visibility = View.GONE
     }
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+            // Use the returned uri.
+            result.uriContent?.let {
+                viewModel.setCurrentContentUri(it)
+            }
+        } else {
+            // An error occurred.
+            val exception = result.error
+            showToast(exception?.message.toString())
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,9 +65,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // TODO: Make history Layout and Show here
-
-
         binding.galleryButton.setOnClickListener { startGallery() }
 
         viewModel.currentImgUri.observe(requireActivity()) { uri ->
@@ -66,10 +78,25 @@ class HomeFragment : Fragment() {
             } ?: showToast("No image is chosen")
         }
 
+        binding.cropButton.setOnClickListener {
+            currentImageUri?.let { imgUri ->
+                startCrop(imgUri)
+            } ?: showToast("No image is chosen")
+        }
+
+
     }
 
     private fun startGallery() {
         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
+    private fun startCrop(imgUri: Uri){
+        cropImage.launch(
+          CropImageContractOptions(imgUri, CropImageOptions(
+
+          ))
+        )
     }
 
     private fun analyzeImage(imgUri: Uri) {
