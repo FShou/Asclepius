@@ -19,11 +19,45 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_place_holder"/>
 
+
+
         <TextView
             android:id="@+id/result_text"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/result" />
+        <ProgressBar
+            android:id="@+id/percetage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/custom_bar"
+            />
+
+
+        <TextView
+            android:id="@+id/tvTimeStamp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/time_stamp"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/tell_your_doctor"
+            app:cornerRadius="?attr/cornerRadius"
+            app:icon="@drawable/round_message_24"/>
+
+
+
     </LinearLayout>
 </ScrollView>

@@ -15,4 +15,6 @@
     <string name="news">News</string>
     <string name="detect_skin_cancer">Detect Skin Cancer</string>
     <string name="choose_an_image">Choose an Image</string>
+    <string name="time_stamp">Time Stamp</string>
+    <string name="tell_your_doctor">Tell your Doctor</string>
 </resources>

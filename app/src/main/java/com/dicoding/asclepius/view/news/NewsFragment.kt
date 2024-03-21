@@ -7,25 +7,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dicoding.asclepius.R
+import com.dicoding.asclepius.databinding.FragmentHomeBinding
+import com.dicoding.asclepius.databinding.FragmentNewsBinding
 
 class NewsFragment : Fragment() {
 
     companion object {
         fun newInstance() = NewsFragment()
     }
-
+    private var _binding: FragmentNewsBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: NewsViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        // TODO: Use the ViewModel
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_news, container, false)
+        _binding = FragmentNewsBinding.inflate(inflater,container,false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
