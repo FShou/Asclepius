@@ -1,13 +1,18 @@
-package com.dicoding.asclepius.view
+package com.dicoding.asclepius.view.result
 
+import android.graphics.Bitmap
 import android.icu.text.NumberFormat
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.dicoding.asclepius.databinding.ActivityResultBinding
+import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -42,6 +47,24 @@ class ResultActivity : AppCompatActivity() {
         binding.resultText.text =  result
         binding.percetage.progress = score.dropLast(1).toInt()
         binding.tvTimeStamp.text = formattedDate
+    }
+
+    fun storeImage(image: Bitmap): Uri? {
+        var pictureFile: File = File(Environment.getExternalStorageDirectory().path + "/Folder")
+        // Todo: Load Img
+        val timeStamp = "a"
+        val name = "$timeStamp.jpg"
+        pictureFile = File(pictureFile.path + File.separator + name)
+
+        return try {
+            val fos = FileOutputStream(pictureFile)
+            image.compress(Bitmap.CompressFormat.JPEG, 90, fos)
+            fos.close()
+            pictureFile.toUri()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
     companion object {

@@ -18,4 +18,8 @@
     <string name="time_stamp">Time Stamp</string>
     <string name="tell_your_doctor">Tell your Doctor</string>
     <string name="crop_image">Crop Image</string>
+    <string name="image">Image</string>
+    <string name="label">Label</string>
+    <string name="cancer">Cancer</string>
+    <string name="_90">90%</string>
 </resources>
