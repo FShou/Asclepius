@@ -6,6 +6,8 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.TypeConverters
+import java.util.Date
 
 @Dao
 interface HistoryDao {
@@ -15,6 +17,10 @@ interface HistoryDao {
     @Delete
     suspend fun deleteHistory(history: History)
 
+    @Query("Select exists (SELECT * from History where date_time = :date)")
+    @TypeConverters(DateConverter::class)
+    suspend fun isSaved(date: Date): Boolean
+
     @Query("SELECT * from History order by id_history desc")
-     fun getHistories() : LiveData<List<History>>
+    fun getHistories(): LiveData<List<History>>
 }

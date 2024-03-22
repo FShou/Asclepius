@@ -12,20 +12,12 @@ import com.dicoding.asclepius.databinding.FragmentHistoryBinding
 import com.dicoding.asclepius.util.ViewModelFactory
 import com.dicoding.asclepius.view.adapter.HistoryListAdapter
 
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(),HistoryListAdapter.DeleteListener {
 
 
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
 
-    private val mockHistory = List(5) {
-        History(
-            id = it,
-            label = "Cancer",
-            imgUri = "",
-            score = 0.6f,
-        )
-    }
 
     private val viewModel: HistoryViewModel by viewModels {
         ViewModelFactory.getInstance(requireActivity())
@@ -42,20 +34,16 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Todo: Showing History
         viewModel.getHistories().observe(viewLifecycleOwner) {
             if (it != null) {
                 showHistoryList(it)
             }
         }
-
-
     }
 
     private fun showHistoryList(historyList: List<History>) {
         val rvLayoutManager = LinearLayoutManager(requireActivity())
-        val rvAdapter = HistoryListAdapter(historyList)
+        val rvAdapter = HistoryListAdapter(historyList,this)
 
         binding.rvHistory.apply {
             setHasFixedSize(true)
@@ -67,5 +55,14 @@ class HistoryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDelete(history: History) {
+        try {
+            viewModel.delete(history)
+        }catch (_: Exception){
+
+        }
+
     }
 }

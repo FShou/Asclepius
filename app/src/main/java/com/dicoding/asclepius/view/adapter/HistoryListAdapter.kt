@@ -13,13 +13,17 @@ import com.dicoding.asclepius.view.result.ResultActivity
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class HistoryListAdapter(private val historyList: List<History>) :
+class HistoryListAdapter(private val historyList: List<History>,  val deleteListener: DeleteListener) :
     RecyclerView.Adapter<HistoryListAdapter.HistoryViewHolder>() {
 
-    class HistoryViewHolder(private val binding: HistoryItemBinding) :
+        interface DeleteListener {
+            fun onDelete(history: History)
+        }
+
+    inner class HistoryViewHolder(private val binding: HistoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(history: History) {
-            // Todo: Bind data to view
+
             if (history.label.trim() == "Non Cancer") {
                 binding.tvLabel.setBackgroundResource(R.drawable.custom_label_green)
                 binding.tvLabel.text = history.label
@@ -44,7 +48,7 @@ class HistoryListAdapter(private val historyList: List<History>) :
 
             // Todo: add Delete Modal
             binding.btnDelete.setOnClickListener {
-
+                deleteListener.onDelete(history)
             }
         }
     }
@@ -59,4 +63,5 @@ class HistoryListAdapter(private val historyList: List<History>) :
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         holder.bind(historyList[position])
     }
+
 }

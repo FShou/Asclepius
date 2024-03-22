@@ -2,18 +2,18 @@ package com.dicoding.asclepius.data
 
 import com.dicoding.asclepius.data.local.History
 import com.dicoding.asclepius.data.local.HistoryDao
+import java.util.Date
 
 class AppRepository(
     val historyDao: HistoryDao
 ) {
 
-    // Todo: Local Db data
-     fun getHistories() = historyDao.getHistories()
+
+    fun getHistories() = historyDao.getHistories()
     suspend fun addHistory(history: History) =  historyDao.insertHistory(history)
 
     suspend fun deleteHistory(history: History) = historyDao.deleteHistory(history)
-
-
+    suspend fun isSaved(date: Date) = historyDao.isSaved(date)
 
 
     // Todo: Remote Data

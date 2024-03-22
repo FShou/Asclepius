@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -50,11 +51,14 @@ class ResultActivity : AppCompatActivity() {
         } else {
             intent.getParcelableExtra<History>(EXTRA_HISTORY)?.let { history = it }
         }
+        viewModel.checkIsSaved(history.dateTime)
         showResult()
+        viewModel.isSavedHistory.observe(this@ResultActivity) {
+            if (it) binding.fab.hide()
+        }
         binding.fab.setOnClickListener { saveToHistory() }
-
-
         binding.btnSend.setOnClickListener { sendResult(binding.resultText.text.toString()) }
+
     }
 
     private fun sendResult(result: String) {
@@ -100,12 +104,16 @@ class ResultActivity : AppCompatActivity() {
         // Todo: check if it saved and make a ui change
         val savedImgUri = storeImage(history.imgUri)
         if (savedImgUri == null) {
-            // Todo: Error Message
+            showToast("Failed To Save, retry later")
             return
         }
         history.imgUri = savedImgUri.toString()
-        viewModel.addHistory(history)
+        viewModel.apply {
+            addHistory(history)
+            checkIsSaved(history.dateTime)
+        }
     }
+
 
     private fun storeImage(uri: String): Uri? {
         val dateFormat = SimpleDateFormat("EEE_d_MMM_yyyy_hh_mm_ss", Locale.getDefault())
@@ -126,6 +134,10 @@ class ResultActivity : AppCompatActivity() {
             e.printStackTrace()
             null
         }
+    }
+
+    private fun showToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

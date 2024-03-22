@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+
 
     private var _currentImgUri = MutableLiveData<Uri?>()
     val currentImgUri: LiveData<Uri?> = _currentImgUri
