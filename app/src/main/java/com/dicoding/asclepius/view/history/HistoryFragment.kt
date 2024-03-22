@@ -1,5 +1,6 @@
 package com.dicoding.asclepius.view.history
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,7 @@ import com.dicoding.asclepius.databinding.FragmentHistoryBinding
 import com.dicoding.asclepius.util.ViewModelFactory
 import com.dicoding.asclepius.view.adapter.HistoryListAdapter
 
-class HistoryFragment : Fragment(),HistoryListAdapter.DeleteListener {
+class HistoryFragment : Fragment(), HistoryListAdapter.DeleteListener {
 
 
     private var _binding: FragmentHistoryBinding? = null
@@ -43,7 +44,7 @@ class HistoryFragment : Fragment(),HistoryListAdapter.DeleteListener {
 
     private fun showHistoryList(historyList: List<History>) {
         val rvLayoutManager = LinearLayoutManager(requireActivity())
-        val rvAdapter = HistoryListAdapter(historyList,this)
+        val rvAdapter = HistoryListAdapter(historyList, this)
 
         binding.rvHistory.apply {
             setHasFixedSize(true)
@@ -57,12 +58,18 @@ class HistoryFragment : Fragment(),HistoryListAdapter.DeleteListener {
         _binding = null
     }
 
-    override fun onDelete(history: History) {
-        try {
-            viewModel.delete(history)
-        }catch (_: Exception){
+    override fun onDeleteHistory(history: History) {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        builder
+            .setMessage("This cannot be undone")
+            .setPositiveButton("Delete") { _, _ ->
+                try {
+                    viewModel.delete(history)
+                } catch (_: Exception) {
 
-        }
-
+                }
+            }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 }

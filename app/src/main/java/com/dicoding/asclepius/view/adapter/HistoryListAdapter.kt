@@ -17,7 +17,7 @@ class HistoryListAdapter(private val historyList: List<History>,  val deleteList
     RecyclerView.Adapter<HistoryListAdapter.HistoryViewHolder>() {
 
         interface DeleteListener {
-            fun onDelete(history: History)
+            fun onDeleteHistory(history: History)
         }
 
     inner class HistoryViewHolder(private val binding: HistoryItemBinding) :
@@ -46,9 +46,9 @@ class HistoryListAdapter(private val historyList: List<History>,  val deleteList
                 itemView.context.startActivity(intent)
             }
 
-            // Todo: add Delete Modal
+
             binding.btnDelete.setOnClickListener {
-                deleteListener.onDelete(history)
+                deleteListener.onDeleteHistory(history)
             }
         }
     }
