@@ -17,7 +17,7 @@ abstract class HistoryDatabase : RoomDatabase() {
                 instance ?: Room.databaseBuilder(
                     context.applicationContext,
                     HistoryDatabase::class.java,
-                    "History.db"
+                    "HistoryDbg1.db"
                 ).build()
             }
     }

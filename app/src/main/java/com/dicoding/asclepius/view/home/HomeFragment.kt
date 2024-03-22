@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageOptions
+import com.dicoding.asclepius.data.local.History
 import com.dicoding.asclepius.databinding.FragmentHomeBinding
 import com.dicoding.asclepius.helper.ImageClassifierHelper
 import com.dicoding.asclepius.view.result.ResultActivity
@@ -122,9 +123,12 @@ class HomeFragment : Fragment() {
     }
     private fun moveToResult(imgUri: Uri, label: String, score: Float) {
         val intent = Intent( activity, ResultActivity::class.java)
-        intent.putExtra(ResultActivity.EXTRA_IMG_URI, imgUri.toString())
-        intent.putExtra(ResultActivity.EXTRA_LABEL, label)
-        intent.putExtra(ResultActivity.EXTRA_SCORE, score)
+        val history = History(
+            label = label,
+            score = score,
+            imgUri = imgUri.toString()
+        )
+        intent.putExtra(ResultActivity.EXTRA_HISTORY,history)
         startActivity(intent)
     }
 

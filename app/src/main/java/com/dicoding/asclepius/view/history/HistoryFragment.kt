@@ -22,11 +22,9 @@ class HistoryFragment : Fragment() {
         History(
             id = it,
             label = "Cancer",
-            dateTime = "Saturday, 27 April 2024",
             imgUri = "",
             score = 0.6f,
         )
-
     }
 
     private val viewModel: HistoryViewModel by viewModels {
