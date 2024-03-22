@@ -1,21 +1,22 @@
 package com.dicoding.asclepius.view.news
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.dicoding.asclepius.databinding.FragmentNewsBinding
+import com.dicoding.asclepius.util.ViewModelFactory
 
 class NewsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = NewsFragment()
-    }
+   
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: NewsViewModel by viewModels()
+    private val viewModel: NewsViewModel by viewModels {
+        ViewModelFactory.getInstance(requireActivity())
+    }
 
 
 
@@ -25,6 +26,14 @@ class NewsFragment : Fragment() {
     ): View {
         _binding = FragmentNewsBinding.inflate(inflater,container,false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getNews().observe(viewLifecycleOwner) {
+            println(it)
+        }
     }
 
     override fun onDestroyView() {

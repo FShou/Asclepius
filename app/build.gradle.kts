@@ -21,13 +21,22 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField( "String", "API_KEY", "\"5668b30d238c4d52acff43c189e3408e\"")
+            buildConfigField( "String", "BASE_URL", "\"https://newsapi.org\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            buildConfigField( "String", "API_KEY", "\"5668b30d238c4d52acff43c189e3408e\"")
+            buildConfigField( "String", "BASE_URL", "\"https://newsapi.org\"")
         }
+        
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -39,6 +48,7 @@ android {
     buildFeatures {
         viewBinding = true
         mlModelBinding = true
+        buildConfig= true
     }
 
 
@@ -72,4 +82,9 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
     implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
     implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
+
+    // Api
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 }

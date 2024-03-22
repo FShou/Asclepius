@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.asclepius.data.AppRepository
 import com.dicoding.asclepius.di.Injection
 import com.dicoding.asclepius.view.history.HistoryViewModel
+import com.dicoding.asclepius.view.news.NewsViewModel
 import com.dicoding.asclepius.view.result.ResultViewModel
 
 
@@ -16,6 +17,8 @@ class ViewModelFactory private constructor(private val appRepository: AppReposit
         when {
             modelClass.isAssignableFrom(HistoryViewModel::class.java)-> return HistoryViewModel(appRepository) as T
             modelClass.isAssignableFrom(ResultViewModel::class.java)-> return ResultViewModel(appRepository) as T
+            modelClass.isAssignableFrom(NewsViewModel::class.java)-> return NewsViewModel(appRepository) as T
+
         }
 
         throw IllegalArgumentException("Unkown ViewModel")
