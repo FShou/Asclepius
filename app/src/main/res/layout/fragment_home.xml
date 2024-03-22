@@ -40,18 +40,6 @@
 
 
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/progressIndicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        app:indeterminateAnimationType="disjoint"
-        app:indicatorColor="?attr/colorTertiary"
-        android:visibility="gone"
-        tools:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/previewCard" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/previewCard"
@@ -71,6 +59,20 @@
             android:contentDescription="@string/image_to_analyze"
             app:srcCompat="@drawable/ic_place_holder" />
     </com.google.android.material.card.MaterialCardView>
+        <ProgressBar
+            android:id="@+id/progressIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:indeterminateAnimationType="disjoint"
+            app:indicatorColor="?attr/colorTertiary"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintTop_toTopOf="@id/previewCard"
+            app:layout_constraintBottom_toBottomOf="@id/previewCard"
+            app:layout_constraintStart_toStartOf="@id/previewCard"
+            app:layout_constraintEnd_toEndOf="@id/previewCard"
+            />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

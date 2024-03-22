@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.dicoding.asclepius.R
-import com.dicoding.asclepius.databinding.FragmentHomeBinding
 import com.dicoding.asclepius.databinding.FragmentNewsBinding
 
 class NewsFragment : Fragment() {

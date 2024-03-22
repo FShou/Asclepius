@@ -33,8 +33,6 @@ class ImageClassifierHelper(
     }
 
     private fun setupImageClassifier() {
-
-        // TODO: Use NPU & GPU
         val imgClassifierOptions = ImageClassifier.ImageClassifierOptions.builder()
             .setScoreThreshold(threshold)
             .setMaxResults(maxResult)
@@ -53,7 +51,7 @@ class ImageClassifierHelper(
                 imgClassifierOptions.build()
             )
         } catch (e: IllegalStateException) {
-            classifierListener.onError("Error msg") // Todo: add error msg in string res
+            classifierListener.onError("Failed to Classify image")
             Log.e(TAG, e.message.toString())
         }
 
