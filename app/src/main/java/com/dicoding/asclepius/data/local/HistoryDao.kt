@@ -1,5 +1,6 @@
 package com.dicoding.asclepius.data.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -14,8 +15,6 @@ interface HistoryDao {
     @Delete
     suspend fun deleteHistory(history: History)
 
-    @Query("SELECT * from History")
-    suspend fun getHistories() : List<History>
-
-
+    @Query("SELECT * from History order by id_history desc")
+     fun getHistories() : LiveData<List<History>>
 }

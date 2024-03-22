@@ -1,5 +1,6 @@
 package com.dicoding.asclepius.view.result
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.graphics.ImageDecoder.decodeBitmap
@@ -50,7 +51,35 @@ class ResultActivity : AppCompatActivity() {
             intent.getParcelableExtra<History>(EXTRA_HISTORY)?.let { history = it }
         }
         showResult()
-        binding.btnSend.setOnClickListener { saveToHistory() }
+        binding.fab.setOnClickListener { saveToHistory() }
+
+
+        binding.btnSend.setOnClickListener { sendResult(binding.resultText.text.toString()) }
+    }
+
+    private fun sendResult(result: String) {
+        val imgUri = getImgUri()
+        val shareIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "Skin cancer detector result: $result")
+            putExtra(Intent.EXTRA_STREAM, imgUri)
+
+            type = "text/plain"
+            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+
+        }
+        startActivity(Intent.createChooser(shareIntent, null))
+    }
+
+    private fun getImgUri(): Uri {
+        val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            decodeBitmap(ImageDecoder.createSource(contentResolver, Uri.parse(history.imgUri)))
+        } else {
+            MediaStore.Images.Media.getBitmap(contentResolver, Uri.parse(history.imgUri))
+        }
+        val path: String =
+            MediaStore.Images.Media.insertImage(contentResolver, bitmap, null, null)
+        return Uri.parse(path)
     }
 
     private fun showResult() {
@@ -67,7 +96,8 @@ class ResultActivity : AppCompatActivity() {
         binding.tvTimeStamp.text = formattedDate
     }
 
-    fun saveToHistory() {
+    private fun saveToHistory() {
+        // Todo: check if it saved and make a ui change
         val savedImgUri = storeImage(history.imgUri)
         if (savedImgUri == null) {
             // Todo: Error Message
@@ -81,7 +111,7 @@ class ResultActivity : AppCompatActivity() {
         val dateFormat = SimpleDateFormat("EEE_d_MMM_yyyy_hh_mm_ss", Locale.getDefault())
         val formattedDate = dateFormat.format(history.dateTime)
         val name = "$formattedDate.jpg"
-        val pictureFile = File(this.filesDir,name)
+        val pictureFile = File(this.filesDir, name)
         val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             decodeBitmap(ImageDecoder.createSource(contentResolver, Uri.parse(uri)))
         } else {

@@ -22,4 +22,7 @@
     <string name="label">Label</string>
     <string name="cancer">Cancer</string>
     <string name="_90">90%</string>
+    <string name="result_image">Result Image</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
 </resources>

@@ -8,7 +8,7 @@ class AppRepository(
 ) {
 
     // Todo: Local Db data
-    suspend fun getHistories() = historyDao.getHistories()
+     fun getHistories() = historyDao.getHistories()
     suspend fun addHistory(history: History) =  historyDao.insertHistory(history)
 
     suspend fun deleteHistory(history: History) = historyDao.deleteHistory(history)

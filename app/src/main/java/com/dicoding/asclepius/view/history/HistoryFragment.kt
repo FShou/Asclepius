@@ -45,11 +45,11 @@ class HistoryFragment : Fragment() {
 
         // Todo: Showing History
         viewModel.getHistories().observe(viewLifecycleOwner) {
-            it?.let { historyList ->
-                showHistoryList(historyList)
+            if (it != null) {
+                showHistoryList(it)
             }
         }
-        showHistoryList(mockHistory)
+
 
     }
 
