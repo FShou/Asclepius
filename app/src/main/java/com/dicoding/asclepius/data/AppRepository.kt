@@ -1,7 +1,5 @@
 package com.dicoding.asclepius.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
 import com.dicoding.asclepius.data.local.History
 import com.dicoding.asclepius.data.local.HistoryDao
 import com.dicoding.asclepius.data.remote.ApiService
@@ -23,14 +21,9 @@ class AppRepository private constructor(
 
     // Todo: Remote Data
 
-     fun getNews(): LiveData<List<ArticlesItem?>?> = liveData {
-        try {
-            val response = apiService.getNews()
-            val articles =  response.articles
-            emit(articles)
-        } catch (e: Exception) {
-
-        }
+    suspend fun getNews(): List<ArticlesItem?>? {
+        val response = apiService.getNews()
+        return response.articles
     }
 
     companion object {

@@ -23,8 +23,6 @@ class NewsFragment : Fragment(), NewsListAdapter.NewsListener {
         ViewModelFactory.getInstance(requireActivity())
     }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +34,7 @@ class NewsFragment : Fragment(), NewsListAdapter.NewsListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getNews().observe(viewLifecycleOwner) { articlesItemList ->
+        viewModel.articleList.observe(viewLifecycleOwner) { articlesItemList ->
             articlesItemList?.let {
                 setNews(it)
             }
