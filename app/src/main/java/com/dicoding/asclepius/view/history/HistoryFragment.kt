@@ -51,6 +51,11 @@ class HistoryFragment : Fragment(), HistoryListAdapter.DeleteListener {
             layoutManager = rvLayoutManager
             adapter = rvAdapter
         }
+        if (historyList.isEmpty()){
+            binding.tvNotFound.visibility = View.VISIBLE
+        }
+
+        binding.progressBar.visibility = View.GONE
     }
 
     override fun onDestroyView() {

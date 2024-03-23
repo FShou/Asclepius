@@ -16,10 +16,32 @@
         android:paddingVertical="24dp"
         />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvNews"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_marginTop="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"/>
+
+        <TextView
+            android:id="@+id/tvNotFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_news_found"
+            android:visibility="gone"
+            android:layout_gravity="top|center"
+            android:layout_marginTop="20dp"
+            tools:visibility="visible"
+            />
+    </FrameLayout>
+
 
 </LinearLayout>

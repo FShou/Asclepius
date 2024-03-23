@@ -49,6 +49,11 @@ class NewsFragment : Fragment(), NewsListAdapter.NewsListener {
             layoutManager = newsLayout
             adapter = newsAdapter
         }
+        if (listArticle.isEmpty()){
+            binding.tvNotFound.visibility = View.VISIBLE
+        }
+
+        binding.progressBar.visibility = View.GONE
     }
 
     override fun onDestroyView() {
