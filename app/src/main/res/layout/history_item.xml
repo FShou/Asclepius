@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/custom_label_green"
+            android:background="@drawable/custom_label_danger"
             android:text="@string/cancer"
             android:textColor="?attr/colorOnError"
             android:textSize="12sp"

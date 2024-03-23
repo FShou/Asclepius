@@ -25,7 +25,7 @@ class HistoryListAdapter(private val historyList: List<History>,  val deleteList
         fun bind(history: History) {
 
             if (history.label.trim() == "Non Cancer") {
-                binding.tvLabel.setBackgroundResource(R.drawable.custom_label_green)
+                binding.tvLabel.setBackgroundResource(R.drawable.custom_label_save)
                 binding.tvLabel.text = history.label
             }
             val formattedScore = NumberFormat.getPercentInstance().format(history.score).trim()
