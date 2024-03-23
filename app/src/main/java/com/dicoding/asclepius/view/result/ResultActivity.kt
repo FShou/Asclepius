@@ -102,7 +102,6 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun saveToHistory() {
-        // Todo: check if it saved and make a ui change
         val savedImgUri = storeImage(history.imgUri)
         if (savedImgUri == null) {
             showToast("Failed To Save, retry later")

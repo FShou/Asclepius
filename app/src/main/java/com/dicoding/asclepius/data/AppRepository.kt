@@ -19,7 +19,7 @@ class AppRepository private constructor(
     suspend fun isSaved(date: Date) = historyDao.isSaved(date)
 
 
-    // Todo: Remote Data
+
 
     suspend fun getNews(): List<ArticlesItem?>? {
         val response = apiService.getNews()
