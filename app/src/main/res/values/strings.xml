@@ -25,4 +25,8 @@
     <string name="result_image">Result Image</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="date">Date</string>
+    <string name="latest_news_about_cancer">Latest News About Cancer</string>
 </resources>

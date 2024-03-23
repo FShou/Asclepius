@@ -73,6 +73,7 @@ dependencies {
 
 
     implementation("com.vanniktech:android-image-cropper:4.5.0")
+    implementation("io.coil-kt:coil:2.6.0")
 
     implementation("androidx.room:room-runtime:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
