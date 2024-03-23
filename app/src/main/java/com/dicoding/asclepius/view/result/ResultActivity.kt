@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -54,7 +55,7 @@ class ResultActivity : AppCompatActivity() {
         viewModel.checkIsSaved(history.dateTime)
         showResult()
         viewModel.isSavedHistory.observe(this@ResultActivity) {
-            if (it) binding.fab.hide()
+            if (it) binding.fab.visibility = View.GONE
         }
         binding.fab.setOnClickListener { saveToHistory() }
         binding.btnSend.setOnClickListener { sendResult(binding.resultText.text.toString()) }
